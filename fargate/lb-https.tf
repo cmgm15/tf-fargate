@@ -41,7 +41,7 @@ resource "aws_security_group_rule" "ingress_lb_https" {
   security_group_id = aws_security_group.lb.id
 }
 
-resource "aws_security_group_rule" "ingress_lb_https" {
+resource "aws_security_group_rule" "ingress_lb_http" {
   type              = "ingress"
   description       = "HTTP"
   from_port         = "80"
