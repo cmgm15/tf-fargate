@@ -34,7 +34,7 @@ resource "aws_ecs_task_definition" "app" {
   network_mode             = "awsvpc"
   cpu                      = var.container_cpu
   memory                   = var.container_memory
-  execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
+  execution_role_arn       = aws_iam_role.app_role.arn
 
   task_role_arn = aws_iam_role.app_role.arn
 
