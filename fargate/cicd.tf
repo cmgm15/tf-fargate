@@ -14,17 +14,17 @@ variable "cicd_user" {
 }
 
 resource "aws_iam_user" "cicd" {
-  count = var.cicd_user : 1 ? 0
+  count = var.cicd_user ? 1 : 0
   name  = "cicd_${var.app}_${var.cicd_environments}"
 }
 
 resource "aws_iam_access_key" "cicd_keys" {
-  count = var.cicd_user : 1 ? 0
+  count = var.cicd_user ? 1 : 0
   user = aws_iam_user.cicd.name
 }
 
 data "aws_iam_policy_document" "cicd_policy" {
-  count = var.cicd_user : 1 ? 0
+  count = var.cicd_user ? 1 : 0
   statement {
     sid = "ecr"
 
@@ -74,14 +74,14 @@ data "aws_iam_policy_document" "cicd_policy" {
 }
 
 resource "aws_iam_user_policy" "cicd_user_policy" {
-  count = var.cicd_user : 1 ? 0
+  count = var.cicd_user ? 1 : 0
   name   = "${var.app}_${var.environment}_cicd"
   user   = aws_iam_user.cicd.name
   policy = data.aws_iam_policy_document.cicd_policy.json
 }
 
 data "aws_ecr_repository" "ecr" {
-  count = var.cicd_user : 1 ? 0
+  count = var.cicd_user ? 1 : 0
   name = var.app
 }
 
