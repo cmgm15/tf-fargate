@@ -15,7 +15,7 @@ variable "cicd_user" {
 
 resource "aws_iam_user" "cicd" {
   count = var.cicd_user ? 1 : 0
-  name  = "cicd_${var.app}_${var.cicd_environments}"
+  name  = "cicd_${var.app}_${var.environment}"
 }
 
 resource "aws_iam_access_key" "cicd_keys" {
