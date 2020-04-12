@@ -101,7 +101,7 @@ resource "aws_ecs_service" "app" {
   }
 }
 
-resource "aws_iam_role" "taskExecution" {
+resource "aws_iam_role" "app_role" {
   name               = "${var.app}-${var.environment}-ecs"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 }
@@ -118,7 +118,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "taskExecution_policy" {
-  role       = aws_iam_role.taskExecution.name
+  role       = aws_iam_role.app_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
