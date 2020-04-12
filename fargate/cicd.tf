@@ -20,7 +20,7 @@ resource "aws_iam_user" "cicd" {
 
 resource "aws_iam_access_key" "cicd_keys" {
   count = var.cicd_user ? 1 : 0
-  user = aws_iam_user.cicd.1.name
+  user = aws_iam_user.cicd.0.name
 }
 
 data "aws_iam_policy_document" "cicd_policy" {
@@ -75,8 +75,8 @@ data "aws_iam_policy_document" "cicd_policy" {
 resource "aws_iam_user_policy" "cicd_user_policy" {
   count = var.cicd_user ? 1 : 0
   name   = "${var.app}_${var.environment}_cicd"
-  user   = aws_iam_user.cicd.1.name
-  policy = data.aws_iam_policy_document.cicd_policy.1.json
+  user   = aws_iam_user.cicd.0.name
+  policy = data.aws_iam_policy_document.cicd_policy.0.json
 }
 
 data "aws_ecr_repository" "ecr" {
